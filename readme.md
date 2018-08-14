@@ -12,11 +12,9 @@
     DayInfo와 AnimeInfo라는 클래스가 있습니다.
 
     DayInfo는 예를 들어 월요일이면 월요일 전체 애니목록을 가져 옵니다.
-
     매개변수는 0부터 6까지 즉 일~토까지의 정보를 가져옵니다. -> 예: DayInfo(0)
-
+    
     입력후 get_data()로 json으로 이루어진 데이터를 dict로 변환하여 리턴합니다.
-
     print_data 함수는 dict의 key값만 가져와 list로 변환 후 애니이름들을 순서대로 보여줍니다.
 
 
@@ -28,9 +26,6 @@
     -> 예: AnimeInfo(0, 0)
 
     get_title()통해 리턴된 dict의 key값(애니명)만 가져오고
-
     get_code()통해 리턴된 dict의 value값(애니고유코드)만 가져옵니다.
-
     get_fullinfo() 위의 두 함수가 리턴한 값들을 한꺼번에 출력하여 한 작품에 대한 정보를 볼 수 있습니다.
-
     get_subdata는 해당작품에 대한 자막정보를 불러옵니다.
