@@ -18,7 +18,6 @@
     print_data 함수는 dict의 key값만 가져와 list로 변환 후 애니이름들을 순서대로 보여줍니다.
 
 
-
     AnimeInfo클래스는 DayInfo클래스의 get_data()함수를 통해 데이터를 받고 한 작품의 정보를 보여줍니다.
 
     매개변수는 두 개를 입력 해야합니다. 첫번째는 DayInfo클래스에 입력되는 매개변수이며 
