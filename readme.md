@@ -5,5 +5,4 @@
 * 애니시아 API 사용자규약 참고 -> https://www.anissia.net/?m=1&b=4 
 * 애니시아 애니편성표 -> https://www.anissia.net/anitime/
 ## 사용방법
-
-# 새롭게 바꾸고 있습니다. 개발자 및 일반 사용자분들도 사용할 수 있게 대폭 수정중입니다.
+* vㅍ
