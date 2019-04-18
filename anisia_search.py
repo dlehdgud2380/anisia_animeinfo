@@ -1,97 +1,117 @@
-import json
-import urllib.request
+import sys
+import requests
+import os
 
-#가져올 데이터의 주소(상수) 
+os.system('cls' if os.name == 'nt' else 'clear')
+print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+
 URL = "https://www.anissia.net/anitime/list?w="
-#자막정보를 가져올 데이터의 주소(상수)
-SUB_URL = "https://www.anissia.net/anitime/cap?i="
+DAY = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
+mod = sys.modules[__name__]
 
-def api_request(url):
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request)
-    get_jsondata = response.read().decode('utf-8')
-    json_data = json.loads(get_jsondata)
+#7개의 변수를 리스트안에 생성
+animedata = [setattr(mod, 'day_{}'.format(i), i) for i in range(0, 7)]
 
-    return json_data
+#서버체크
+servercheck = str(requests.get(URL).status_code)
+if servercheck == "200" :
+  print(servercheck + " - OK")
+  print("최신 데이터 불러오는 중 ...")
+elif servercheck == "404" :
+  print(servercheck + " - 서버 점검중")
+  print("서버조회 불가로 종료합니다")
+else:
+  print(servercheck + " - 서버 또는 인터넷 문제")
+  print("서버조회가 불가로 종료합니다. 인터넷 접속 확인후 다시 실행해주세요")
 
-#예: 월요일 방영하는 애니면 월요일치 애니만 받아온다. 0(일요일) ~ 6(토요일까지)
-#참고: dict로 return하니 꼭 list로 변환 필수
+#정보 파싱
+for i in range(0, 7):
+  response = requests.get(URL + str(i))
+  animedata[i] = response.json()
+
+#그날의 애니방영시간표를 가져오는 클래스
 class DayTable:
-    def __init__(self, num):
-        self.num = num
+  def __init__ (self, num):
+    self.num = num
 
-    def get_data(self):
-        getlist = api_request(URL + str(self.num))
-        title_data = {}
-        count = 0
-        for i in getlist:
-            title_data[getlist[count]['s']] = str(getlist[count]['i'])
-            count += 1
-        return title_data
+  #하루 치 애니 시간표 가져오는 함수
+  def dayinfo(self):
+    daylist = []
+    for i in range(0, len(animedata[self.num])):
+      title = animedata[self.num][i]
+      daylist.append(title['t'] + " " + title['s'])
+    return daylist
+  
+  #dayinfo 함수를 통해 가져온 값을 보기좋게 출력
+  def print_data(self):
+    data = self.dayinfo()
+    print("\n" + " [" + DAY[self.num] + " 방영시간표" + "] " + "\n")
+    print("번호 | 방영시간 | 제목" + "\n")
+    for i in range(0, len(data)):
+      print(str(i).zfill(2) + " " + data[i])
 
-    def print_data(self):
-        data = list(self.get_data().keys())
+''' 일주일치 애니시간표 출력 테스트 알고리즘
+  for i in range(0, 7):
+    temp_list = []
+    for j in range(0, len(animedata)):
+      temp = animedata[i][0]
+      temp_list.append(temp['s'])
+    print(temp_list[i], end=" | ")
+'''
 
-        count = 0
-        for i in data:
-            print(str(count)+ " " + data[count] )
-            count += 1
-        print("\n")
-        
+#타이틀 하나의 정보를 불러오는 클래스
+class TitleInfo:
+  def __init__ (self, num1, num2):
+    self.daycode = num1
+    self.titlecode = num2
+  #제목, 방영요일, 방영시간, 장르, 방영 및 결방 확인, 방영시작일
+  def info(self):
+    data = animedata[self.daycode][self.titlecode]
+    titleinfo = []
+    titleinfo.append("제목: " + data['s'])
+    titleinfo.append("방영요일: " + DAY[self.daycode])
+    titleinfo.append("방영시각: " + data['t'])
+    titleinfo.append("장르: " + data['g'])
+    titleinfo.append("금주 방영 여부: " + data['g'])
+    titleinfo.append("방영시작일: " + data['sd'])
+    return titleinfo
+  
+  #info 함수를 통해 가져온 값을 보기좋게 출력
+  def print_data(self):
+    data = self.info()
+    print("------------------\n선택한 타이틀 정보\n------------------\n")
+    for i in range(0, len(data)):
+      print(data[i])
 
-#애니 한 작품에 대한 정보
-class AnimeInfo:
-    def __init__(self, day, target):
-        self.num_day = day
-        self.num_target = target
+#실행테스트(또는 일반 유저용)
+if __name__ == "__main__" :
 
-    def get_titlename(self):
-        dayinfo = DayTable(self.num_day).get_data()
-        titlelist = list(dayinfo.keys())
-        return titlelist[self.num_target]
+  def program():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+    daycode = int(input("조회 할 요일 선택(0(일요일) - 6(토요일)): "))
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+    a = DayTable(daycode)
+    a.print_data()
+    selectcode = int(input("\n상세정보를 알고싶은 타이틀 번호를 입력: "))
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+    b = TitleInfo(daycode, selectcode)
+    #print(b.info())
+    b.print_data()
 
-    def get_code(self):
-        dayinfo = DayTable(self.num_day).get_data()
-        codelist = list(dayinfo.values())
-        return codelist[self.num_target]
-
-    def get_fullinfo(self):
-        return str("타이틀명: " + self.get_titlename()) + "\n" + "고유코드: " + str(self.get_code())
-
-    def get_subdata(self):
-        data = api_request(SUB_URL + str(self.get_code()))
-        #for i in data:
-            
-        return data
-
-
-"""
-<사용방법>
-일반사용자:
-    프로그램을 실행하면 질문에 따라 진행하시면 됩니다.
-    
-소스사용자:
-    DayInfo와 AnimeInfo라는 클래스가 있습니다.
-    
-    DayInfo는 예를 들어 월요일이면 월요일 전체 애니목록을 가져 옵니다.
-    매개변수는 0부터 6까지 즉 일~토까지의 정보를 가져옵니다. -> 예: DayInfo(0)
-    입력후 get_data()로 json으로 이루어진 데이터를 dict로 변환하여 리턴합니다.
-    print_data 함수는 dict의 key값만 가져와 list로 변환 후 애니이름들을 순서대로 보여줍니다.
-
-    AnimeInfo클래스는 DayInfo클래스의 get_data()함수를 통해 데이터를 받고 한 작품의 정보를 보여줍니다.
-    매개변수는 두 개를 입력 해야합니다. 첫번째는 DayInfo클래스에 입력되는 매개변수이며 두번째는 그 요일의 애니목록중 한가지를 조회합니다.  -> 예: AnimeInfo(0, 0)
-    get_title()통해 리턴된 dict의 key값(애니명)만 가져오고
-    get_code()통해 리턴된 dict의 value값(애니고유코드)만 가져옵니다.
-    get_fullinfo() 위의 두 함수가 리턴한 값들을 한꺼번에 출력하여 한 작품에 대한 정보를 볼 수 있습니다.
-    get_subdata는 해당작품에 대한 자막정보를 불러옵니다.
-    
-"""
-#구동 테스트
-if __name__ == '__main__':
-    input_num1 = int(input("타이틀정보를 불러올 요일 번호를 입력하세요(일0~토6): "))
-    titlelist = DayTable(input_num1)
-    print(titlelist.print_data())
-    input_num2 = int(input("얻고 싶은 타이틀의 순서번호를 입력하세요(0번이 1번째): "))
-    animeinfo = AnimeInfo(input_num1, input_num2)
-    print(animeinfo.get_fullinfo())
-   
+  while(True):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if servercheck == "200" :
+      program()
+      mainmenu = input("\n새로운 정보를 검색하시겠습니까? (Y = 새로 검색, 아무키 = 프로그램종료): ")
+      if mainmenu == "y" and "Y" :
+        os.system('cls' if os.name == 'nt' else 'clear')
+        continue
+      else:
+        break
+    elif servercheck == "404" :
+      break
+    else:
+      break
