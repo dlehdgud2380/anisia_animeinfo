@@ -5,4 +5,9 @@
 * 애니시아 API 사용자규약 참고 -> https://www.anissia.net/?m=1&b=4 
 * 애니시아 애니편성표 -> https://www.anissia.net/anitime/
 ## 사용방법
-* vㅍ
+### 프로그램 체험
+https://AniTimeDL.dlehdgud2380.repl.run
+### 프로그램 개발자
+작성중
+###일반 사용자
+작성중
