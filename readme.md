@@ -9,5 +9,5 @@
 https://AniTimeDL.dlehdgud2380.repl.run
 ### 프로그램 개발자
 작성중
-###일반 사용자
+### 일반 사용자
 작성중
