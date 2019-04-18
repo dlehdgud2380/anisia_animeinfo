@@ -7,6 +7,7 @@
 ## 사용방법
 ### 프로그램 체험
 https://AniTimeDL.dlehdgud2380.repl.run
+<iframe height="400px" width="100%" src="https://repl.it/@dlehdgud2380/AniTimeDL?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 ### 프로그램 개발자
 작성중
 ### 일반 사용자
