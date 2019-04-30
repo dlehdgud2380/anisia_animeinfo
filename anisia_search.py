@@ -90,23 +90,26 @@ if __name__ == "__main__" :
     os.system('cls' if os.name == 'nt' else 'clear')
     print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
     daycode = int(input("조회 할 요일 선택(0(일요일) - 6(토요일)): "))
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
-    a = DayTable(daycode)
-    a.print_data()
-    selectcode = int(input("\n상세정보를 알고싶은 타이틀 번호를 입력: "))
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
-    b = TitleInfo(daycode, selectcode)
-    #print(b.info())
-    b.print_data()
+    if daycode > 6 :
+      print("\n올바른 숫자를 입력해주십시오")
+    else:  
+      os.system('cls' if os.name == 'nt' else 'clear')
+      print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+      a = DayTable(daycode)
+      a.print_data()
+      selectcode = int(input("\n상세정보를 알고싶은 타이틀 번호를 입력: "))
+      os.system('cls' if os.name == 'nt' else 'clear')
+      print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
+      b = TitleInfo(daycode, selectcode)
+      #print(b.info())
+      b.print_data()
 
   while(True):
     os.system('cls' if os.name == 'nt' else 'clear')
     if servercheck == "200" :
       program()
-      mainmenu = input("\n새로운 정보를 검색하시겠습니까? (Y = 새로 검색, 아무키 = 프로그램종료): ")
-      if mainmenu == "y" and "Y" :
+      mainmenu = input("\n다른 정보를 검색하시겠습니까? (Y = 새로 검색, 아무키 = 프로그램종료): ")
+      if mainmenu == "y" and "Y" and "ㅛ" :
         os.system('cls' if os.name == 'nt' else 'clear')
         continue
       else:
