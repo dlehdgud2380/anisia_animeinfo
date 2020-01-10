@@ -15,6 +15,7 @@ https://AniTimeDL.dlehdgud2380.repl.run
 
 ### 개발자
 pip3 install requests
+
 Daytable(인자)
 * print_data()
 
