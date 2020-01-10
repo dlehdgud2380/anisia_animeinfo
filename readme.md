@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/dlehdgud2380/anisia_animeinfo) 
+
 # 애니시아 애니 정보 모듈
 ## 정보
 * Python 3.6.x 기반으로 만들었습니다. (모듈로 사용할 수 있도록 만들어 놓았으며 추가적으로 더욱 개선 할 예정입니다.)
