@@ -13,18 +13,23 @@ https://AniTimeDL.dlehdgud2380.repl.run
 | -------- | -------- | -------- |
 | ![](https://i.imgur.com/26pJbAO.png)     | ![](https://i.imgur.com/xAnAQWg.png)     | ![](https://i.imgur.com/IF8RjEh.png) |
 
-### 개발자
+### 개발자 사용법
 pip3 install requests
 
-Class Daytable(num1)
-* print_data()
-
-Class TitleInfo(num1, num2)
-* print_data()
-
 ```
+## 객체 정보
+
+1. Class Daytable(num)
+출력함수: print_data()
+
+2. Class TitleInfo(num1, num2)
+      self.daycode = num1
+      self.titlecode = num2
+출력함수: print_data()
+
+
 ## 예제코드
-      a = DayTable(num1)
+      a = DayTable(num)
       a.print_data()
 
       b = TitleInfo(num1, num2)
