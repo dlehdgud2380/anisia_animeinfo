@@ -16,29 +16,18 @@ https://AniTimeDL.dlehdgud2380.repl.run
 ### 개발자
 pip3 install requests
 
-Daytable(인자)
+Class Daytable(num1)
 * print_data()
 
-TitleInfo(인자1, 인자2)
-* info()
+Class TitleInfo(num1, num2)
 * print_data()
 
 ```
 ## 예제코드
-
-daycode = int(input("조회 할 요일 선택(0(일요일) - 6(토요일)): "))
-    if daycode > 6 :
-      print("\n올바른 숫자를 입력해주십시오")
-    else:  
-      os.system('cls' if os.name == 'nt' else 'clear')
-      print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
-      a = DayTable(daycode)
+      a = DayTable(num1)
       a.print_data()
-      selectcode = int(input("\n상세정보를 알고싶은 타이틀 번호를 입력: "))
-      os.system('cls' if os.name == 'nt' else 'clear')
-      print("[애니메이션 타이틀 조회 프로그램 by Sc0@Nep]\n")
-      b = TitleInfo(daycode, selectcode)
-      #print(b.info())
+
+      b = TitleInfo(num1, num2)
       b.print_data()
 ```
 
