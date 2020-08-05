@@ -34,6 +34,3 @@ pip3 install requests
       b = TitleInfo(num1, num2)
       b.print_data()
 ```
-
-### 일반 사용자
-작성중
